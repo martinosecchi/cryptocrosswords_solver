@@ -1,0 +1,13 @@
+TODO
+
+search method
+
+
+level: letter -> list of words that have that letter 
+layers: each layer has the levels of words that have the letter of the level at the position of the layer
+example: "car" will be in 
+layer1 c  layer2 a  layer3 r
+
+still too slow
+
+I need a different DS, faster
