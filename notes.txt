@@ -1,6 +1,7 @@
 TODO
 
-search method
+search method, include hints like length and letters in which positions
+for crypto pattern too (given by numbers)
 
 
 level: letter -> list of words that have that letter 
