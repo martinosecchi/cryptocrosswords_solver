@@ -5,31 +5,7 @@ import os, sys
 import re
 
 alphabet = [l for l in 'abcdefghijklmnopqrstuvwxyz']
-
-
 testwords = list(set('hello wikipedia is a free online encyclopedia with the aim to allow anyone to edit articles wikipedia is the largest and most popular general reference work on the internet and is ranked the fifth most popular website'.split(' ')))
-
-
-class LeveledList(object):
-    def __init__(self, words):
-        self.max_length = max([len(w) for w in words])
-        self.layers = dict(zip(range(1, self.max_length+1), [self.new_level_full() for n in range(self.max_length)]))
-        # {1: {'a':[], 'b': [], 'c': [] ...}, 2: {'a': [], 'b': [], ...}, ...}
-        
-        for word in words:
-            for i in range(len(word)):
-                try:
-                    self.layers[i+1][word[i]].append(word)
-                except Exception as e:
-                    break
-    
-    def new_level_full(self):
-        return dict(zip(alphabet, [[] for n in alphabet]))
-        #{'a': [], 'b': [], 'c': [], 'd': [], 'e': [], ....
-
-    def search(self, length, *kw):
-        pass
-
 
 class Node(object):
     def __init__(self):
@@ -44,7 +20,7 @@ class Node(object):
 class Trie(object):
     def __init__(self, words):
         self.max_length = max([len(w) for w in words])
-        self.layers = dict(zip(range(1, self.max_length+1), [Node() for n in range(self.max_length)]))
+        self.layer = dict(zip(range(1, self.max_length+1), [Node() for n in range(self.max_length)]))
         # {1: root, 2: root, 3: root, ...}
         print 'loading words..'
         n = 0.0
@@ -58,7 +34,7 @@ class Trie(object):
         print 'done.'
 
     def insert(self, layer, letters, word):
-        node = self.layers[layer]
+        node = self.layer[layer]
         for l in letters:
             if not node.children.get(l):
                 node.children[l] = Node()
@@ -70,15 +46,25 @@ class Trie(object):
             node = node.children[l]
         node.words[word] = word  
 
-# t = Trie(testwords)
+    def search_word(self, word):
+        node = self.layer[1]
+        for i in range(len(word)):
+            if node.lengths.has_key(len(word)) and word[i] in node.lengths[len(word)]:
+                node = node.children[word[i]]
+            else:
+                return False
+        return word in node.words
 
-def load_english():
-    filename = "words_dictionary.json"
+    def search_pattern(self, pattern):
+        pass
+
+t = Trie(testwords)
+
+def load_english(filename="words_dictionary.json"):
     with open(filename,"r") as english_dictionary:
         valid_words = json.load(english_dictionary)
         return valid_words.keys()
-def load_italian():
-    filename = "../parole/parole.txt"
+def load_italian(filename="../parole/parole.txt"):
     lines = []
     with open(filename, "r") as f:
         for line in f:
@@ -102,7 +88,7 @@ def load_italian():
                 print 'unicode error: ' + line.rstrip('\n'), str(e)
     return lines
 
-it = load_italian()
+# it = load_italian()
 
 def validate(lines, n, m):
     pattern = re.compile(r'[_]{1}|[0-9]{1,2}')
@@ -135,3 +121,23 @@ def parse_input():
     return lines, hints
 
 square, hints = parse_input()
+
+def flatten(square, n, m):
+    patterns = []
+    # # horizontal
+    for i in range(n):
+        word = []
+        for j in range(m):
+            word.append(square[i][j]) if square[i][j] != '_' else None
+            if square[i][j] == '_' or j == m-1:
+                patterns.append(word) if len(word) > 1 else None
+                word = []
+    # vertical
+    for j in range(m):
+        word = []
+        for i in range(n):
+            word.append(square[i][j]) if square[i][j] != '_' else None
+            if square[i][j] == '_' or i == n-1:
+                patterns.append(word) if len(word) > 1 else None
+                word = []
+    return patterns
