@@ -60,6 +60,19 @@ class Trie(object):
 
 t = Trie(testwords)
 
+
+class Pattern(object):
+    def __init__(self, array)
+        self.array_form = array
+        self.rules = self._generate_rules(array)
+
+    def _generate_rules(self):
+        pass
+
+    def check(self, word): # checks a word
+        pass
+
+
 def load_english(filename="words_dictionary.json"):
     with open(filename,"r") as english_dictionary:
         valid_words = json.load(english_dictionary)
@@ -70,16 +83,16 @@ def load_italian(filename="../parole/parole.txt"):
         for line in f:
             try:
                 word = line.decode('utf8')
-                word.replace(u'à', 'a')
-                word.replace(u'á', 'a')
-                word.replace(u'è', 'e')
-                word.replace(u'é', 'e')
-                word.replace(u'í', 'i')
-                word.replace(u'ì', 'i')
-                word.replace(u'ò', 'o')
-                word.replace(u'ó', 'o')
-                word.replace(u'ù', 'u')
-                word.replace(u'ú', 'u')
+                word = word.replace(u'à', 'a')
+                word = word.replace(u'á', 'a')
+                word = word.replace(u'è', 'e')
+                word = word.replace(u'é', 'e')
+                word = word.replace(u'í', 'i')
+                word = word.replace(u'ì', 'i')
+                word = word.replace(u'ò', 'o')
+                word = word.replace(u'ó', 'o')
+                word = word.replace(u'ù', 'u')
+                word = word.replace(u'ú', 'u')
                 for l in word:
                     if l not in alphabet + ['\n']:
                         raise Exception(l.decode('utf8') + u' - not in alphabet')
@@ -88,56 +101,68 @@ def load_italian(filename="../parole/parole.txt"):
                 print 'unicode error: ' + line.rstrip('\n'), str(e)
     return lines
 
-# it = load_italian()
 
-def validate(lines, n, m):
-    pattern = re.compile(r'[_]{1}|[0-9]{1,2}')
-    try:
-        assert len(lines) == m
-        for l in lines:
-            assert len(l) == n
-            for e in range(len(l)):
-                l[e] = l[e].rstrip('\n')
-                assert pattern.match(l[e]) is not None
-    except AssertionError as ae:
-        print 'Error in input: validate failed.', ae
+class Solver(object):
+    def __init__(self, dictionary, inputfn):
+        self.t = Trie(load_italian(dictionary))
+        self.patterns, self.hints = self.parse_input(inputfn)
+        self.solution = dict(zip(map(lambda x: str(x), range(1,len(alphabet)+1)),map(lambda x: str(x), range(1,len(alphabet)+1)) ))
+        # {'1':'1', '2':'2', ...}
+        self._possible_vowels = []
+        self._possible_letters = {}
 
-def parse_input():
-    filename = "input.txt"
-    lines = []
-    hints = {}
-    with open(filename, "r") as f:
-        n = int(f.readline())
-        m = int(f.readline())
-        for i in range(m):
-            lines.append(f.readline().split(','))
-        while True:
-            line = f.readline()
-            if not line:
-                break
-            k,v = line.split(',')
-            hints[k] = v.rstrip('\n')
-    validate(lines, n, m)
-    return lines, hints
+        for k,v in self.hints.items():
+            self.solution[k] = v
 
-square, hints = parse_input()
+    def _is_vowel(self, letter):
+        return letter in 'aeiou'
 
-def flatten(square, n, m):
-    patterns = []
-    # # horizontal
-    for i in range(n):
-        word = []
-        for j in range(m):
-            word.append(square[i][j]) if square[i][j] != '_' else None
-            if square[i][j] == '_' or j == m-1:
-                patterns.append(word) if len(word) > 1 else None
-                word = []
-    # vertical
-    for j in range(m):
-        word = []
+    def parse_input(self ):
+        filename = "input.txt"
+        lines = []
+        hints = {}
+        with open(filename, "r") as f:
+            n = int(f.readline())
+            m = int(f.readline())
+            for i in range(m):
+                lines.append(f.readline().split(','))
+            while True:
+                line = f.readline()
+                if not line:
+                    break
+                k,v = line.split(',')
+                hints[k] = v.rstrip('\n')
+        self._validate(lines, n, m)
+        return self._flatten(lines,n,m), hints
+
+    def _validate(self, lines, n, m):
+        pattern = re.compile(r'[_]{1}|[0-9]{1,2}')
+        try:
+            assert len(lines) == m
+            for l in lines:
+                assert len(l) == n
+                for e in range(len(l)):
+                    l[e] = l[e].rstrip('\n')
+                    assert pattern.match(l[e]) is not None
+        except AssertionError as ae:
+            print 'Error in input: validate failed.', ae
+
+    def _flatten(self, square, n, m):
+        patterns = []
+        # # horizontal
         for i in range(n):
-            word.append(square[i][j]) if square[i][j] != '_' else None
-            if square[i][j] == '_' or i == n-1:
-                patterns.append(word) if len(word) > 1 else None
-                word = []
-    return patterns
+            word = []
+            for j in range(m):
+                word.append(square[i][j]) if square[i][j] != '_' else None
+                if square[i][j] == '_' or j == m-1:
+                    patterns.append(word) if len(word) > 1 else None
+                    word = []
+        # vertical
+        for j in range(m):
+            word = []
+            for i in range(n):
+                word.append(square[i][j]) if square[i][j] != '_' else None
+                if square[i][j] == '_' or i == n-1:
+                    patterns.append(word) if len(word) > 1 else None
+                    word = []
+        return patterns
