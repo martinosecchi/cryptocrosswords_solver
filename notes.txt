@@ -1,15 +1,18 @@
 TODO
 
-
+29 Nov
 instead of creating a new trie for each layer, 
 is it possible to keep a single reference of each sublayer when building layer 1?
 need to brainstorm
 
+also, I need to come up with a good test input and reduced dictionary to test correctness
 
 
+
+
+early note:
 search method, include hints like length and letters in which positions
 for crypto pattern too (given by numbers)
-
 
 level: letter -> list of words that have that letter 
 layers: each layer has the levels of words that have the letter of the level at the position of the layer
