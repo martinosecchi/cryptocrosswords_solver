@@ -62,22 +62,39 @@ t = Trie(testwords)
 
 
 class Pattern(object):
-    def __init__(self, array)
+    def __init__(self, array):
         self.array_form = array
-        self.rules = self._generate_rules(array)
+        # ['1', '2', 'l', 'l', '3'] #matches for hello
+        self._letter = re.compile(r'^[a-z]{1}$')
+        self._number = re.compile(r'^[0-9]{1,2}$')
+    def _isletter(self, x):
+        return self._letter.match(x) is not None
+    def _isnumber(self, x):
+        return self._number.match(x) is not None
+        
+    def check(self, word): # checks a word on this pattern
+        if len(word) != len(self.array_form):
+            return False
+        testword = self.array_form[:]
+        testsolution = {}
+        for i in range(len(word)):
+            if self._isnumber(testword[i]):
 
-    def _generate_rules(self):
-        pass
-
-    def check(self, word): # checks a word
-        pass
-
+                if testsolution.has_key(testword[i]):
+                    testword[i] = testsolution[testword[i]]
+                else:
+                    testsolution[testword[i]] = word[i]
+                    testword[i] = word[i]
+        if  ''.join(testword) == word :
+            return testsolution
+        else:
+            return False
 
 def load_english(filename="words_dictionary.json"):
     with open(filename,"r") as english_dictionary:
         valid_words = json.load(english_dictionary)
         return valid_words.keys()
-def load_italian(filename="../parole/parole.txt"):
+def load_italian(filename="parole.txt"):
     lines = []
     with open(filename, "r") as f:
         for line in f:
@@ -136,7 +153,7 @@ class Solver(object):
         return self._flatten(lines,n,m), hints
 
     def _validate(self, lines, n, m):
-        pattern = re.compile(r'[_]{1}|[0-9]{1,2}')
+        pattern = re.compile(r'^[_]{1}|[0-9]{1,2}$')
         try:
             assert len(lines) == m
             for l in lines:
