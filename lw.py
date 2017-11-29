@@ -60,18 +60,22 @@ class Trie(object):
 
 t = Trie(testwords)
 
-
 class Pattern(object):
     def __init__(self, array):
         self.array_form = array
-        # ['1', '2', 'l', 'l', '3'] #matches for hello
+        # ['1', '2', 'l', 'l', '3'] #matches for hello, not collo
         self._letter = re.compile(r'^[a-z]{1}$')
         self._number = re.compile(r'^[0-9]{1,2}$')
     def _isletter(self, x):
         return self._letter.match(x) is not None
     def _isnumber(self, x):
         return self._number.match(x) is not None
-        
+
+    def update(self, solution):
+        for i in range(len(self.array_form)):
+            if self._isnumber(self.array_form[i]) && solution.has_key(self.array_form[i]):
+                self.array_form[i] = solution[self.array_form[i]]
+
     def check(self, word): # checks a word on this pattern
         if len(word) != len(self.array_form):
             return False
@@ -79,16 +83,20 @@ class Pattern(object):
         testsolution = {}
         for i in range(len(word)):
             if self._isnumber(testword[i]):
-
                 if testsolution.has_key(testword[i]):
                     testword[i] = testsolution[testword[i]]
-                else:
+                elif word[i] not in testsolution.values():
                     testsolution[testword[i]] = word[i]
                     testword[i] = word[i]
+                else:
+                    return False
         if  ''.join(testword) == word :
             return testsolution
         else:
             return False
+
+p = Pattern(['1', '2', 'l', 'l', '3'])
+print p.check('collo')
 
 def load_english(filename="words_dictionary.json"):
     with open(filename,"r") as english_dictionary:
