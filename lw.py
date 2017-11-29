@@ -56,7 +56,15 @@ class Trie(object):
         return word in node.words
 
     def search_pattern(self, pattern):
-        pass
+        if p.has_letters():
+            # take the letters, and positions. then start searching from the layer corresponding to the first position
+            # extensive search of all the children at least until the next known position in the word, but only from the ones who
+            # lead to a word of the desired size
+            # in the end, check all the words I find with pattern.check
+            pass
+        else:
+            # NP hard motherfuckers, best avoid raw patterns
+            pass
 
 t = Trie(testwords)
 
@@ -66,6 +74,16 @@ class Pattern(object):
         # ['1', '2', 'l', 'l', '3'] #matches for hello, not collo
         self._letter = re.compile(r'^[a-z]{1}$')
         self._number = re.compile(r'^[0-9]{1,2}$')
+        self._has_letters = None
+    def has_letters(self):
+        if self._has_letters is None:
+            for l in self.array_form:
+                if self._isletter(l):
+                    self._has_letters = True
+                    return True
+            self._has_letters = False
+        return self._has_letters
+
     def _isletter(self, x):
         return self._letter.match(x) is not None
     def _isnumber(self, x):
@@ -75,6 +93,7 @@ class Pattern(object):
         for i in range(len(self.array_form)):
             if self._isnumber(self.array_form[i]) && solution.has_key(self.array_form[i]):
                 self.array_form[i] = solution[self.array_form[i]]
+                self._has_letters = True
 
     def check(self, word): # checks a word on this pattern
         if len(word) != len(self.array_form):

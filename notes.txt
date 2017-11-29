@@ -1,5 +1,12 @@
 TODO
 
+
+instead of creating a new trie for each layer, 
+is it possible to keep a single reference of each sublayer when building layer 1?
+need to brainstorm
+
+
+
 search method, include hints like length and letters in which positions
 for crypto pattern too (given by numbers)
 
