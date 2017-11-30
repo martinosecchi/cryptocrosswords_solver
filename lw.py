@@ -1,8 +1,10 @@
 #!/usr/bin/python
 #coding: utf-8 
+from __future__ import print_function
 import json
 import os, sys
 import re
+from logger import logapp
 
 alphabet = [l for l in 'abcdefghijklmnopqrstuvwxyz']
 testwords = list(set('hello wikipedia is a free online encyclopedia with the aim to allow anyone to edit articles wikipedia is the largest and most popular general reference work on the internet and is ranked the fifth most popular website'.split(' ')))
@@ -22,16 +24,16 @@ class Trie(object):
         self.max_length = max([len(w) for w in words])
         self.layer = dict(zip(range(1, self.max_length+1), [Node() for n in range(self.max_length)]))
         # {1: root, 2: root, 3: root, ...}
-        print 'loading words..'
+        print('loading words from dictionary..')
         n = 0.0
         N = len(words)
         for word in words:
-            sys.stdout.write('%3d %%\r'%(int(n/N*100)))
+            sys.stdout.write('%4d %%\r'%(int(n/N*100)))
             sys.stdout.flush()
             n+=1
             for i in range(len(word)):
                 self.insert(i+1, word[i:], word)
-        print 'done.'
+        print('done loading dictionary.')
 
     def insert(self, layer, letters, word):
         node = self.layer[layer]
@@ -63,59 +65,56 @@ class Trie(object):
             # in the end, check all the words I find with pattern.check
             pass
         else:
-            # NP hard motherfuckers, best avoid raw patterns
+            # best avoid, this might as well be linear search.
+            # look if there are repetitions of letters and their positions, then look in the different layers at the corresponding positions
+            # test the pattern on those words that have the right length
+            # (set operations)
             pass
 
-t = Trie(testwords)
-
 class Pattern(object):
-    def __init__(self, array):
-        self.array_form = array
-        # ['1', '2', 'l', 'l', '3'] #matches for hello, not collo
+    def __init__(self, array, solution):
+        self.array_form = array # only numbers
+        self.solution = solution # shared object
         self._letter = re.compile(r'^[a-z]{1}$')
         self._number = re.compile(r'^[0-9]{1,2}$')
-        self._has_letters = None
     def has_letters(self):
-        if self._has_letters is None:
-            for l in self.array_form:
-                if self._isletter(l):
-                    self._has_letters = True
-                    return True
-            self._has_letters = False
-        return self._has_letters
-
+        letters = 0
+        for x in self.array_form:
+            if self._isletter(self.solution.get(x)):
+                letters += 1
+        return letters
     def _isletter(self, x):
         return self._letter.match(x) is not None
     def _isnumber(self, x):
         return self._number.match(x) is not None
-
-    def update(self, solution):
-        for i in range(len(self.array_form)):
-            if self._isnumber(self.array_form[i]) && solution.has_key(self.array_form[i]):
-                self.array_form[i] = solution[self.array_form[i]]
-                self._has_letters = True
-
+    def _validate(self, word):
+        for l in word:
+            if not self._isletter(l):
+                return False
+        return True
+    # ['1', '2', 'l', 'l', '3'] # matches for hello, not collo
     def check(self, word): # checks a word on this pattern
         if len(word) != len(self.array_form):
             return False
-        testword = self.array_form[:]
-        testsolution = {}
-        for i in range(len(word)):
-            if self._isnumber(testword[i]):
-                if testsolution.has_key(testword[i]):
-                    testword[i] = testsolution[testword[i]]
-                elif word[i] not in testsolution.values():
-                    testsolution[testword[i]] = word[i]
-                    testword[i] = word[i]
-                else:
-                    return False
-        if  ''.join(testword) == word :
-            return testsolution
-        else:
-            return False
-
-p = Pattern(['1', '2', 'l', 'l', '3'])
-print p.check('collo')
+        if self._validate(word):
+            testword = self.array_form[:]
+            testsolution = {}
+            for i in range(len(word)):
+                x = self.solution.get(testword[i]) or testword[i]
+                if self._isnumber(x):
+                    if testsolution.has_key(x):
+                        testword[i] = testsolution[x]
+                    elif word[i] not in testsolution.values():
+                        testsolution[x] = word[i]
+                        testword[i] = word[i]
+                    else:
+                        return False
+                elif self._isletter(x):
+                    testword[i] = x
+            logapp('DEBUG', 'testing word {} - reconstructed as: {} testsolution {}'.format(word, testword, testsolution))
+            if  ''.join(testword) == word :
+                return testsolution
+        return False
 
 def load_english(filename="words_dictionary.json"):
     with open(filename,"r") as english_dictionary:
@@ -142,7 +141,7 @@ def load_italian(filename="parole.txt"):
                         raise Exception(l.decode('utf8') + u' - not in alphabet')
                 lines.append(word.rstrip('\n').encode('utf8'))
             except Exception as e:
-                print 'unicode error: ' + line.rstrip('\n'), str(e)
+                logapp('ERROR', 'unicode error: ' + line.rstrip('\n') + ' ' + str(e))
     return lines
 
 
@@ -150,8 +149,8 @@ class Solver(object):
     def __init__(self, dictionary, inputfn):
         self.t = Trie(load_italian(dictionary))
         self.patterns, self.hints = self.parse_input(inputfn)
-        self.solution = dict(zip(map(lambda x: str(x), range(1,len(alphabet)+1)),map(lambda x: str(x), range(1,len(alphabet)+1)) ))
-        # {'1':'1', '2':'2', ...}
+        self.solution = {}  #dict(zip(map(lambda x: str(x), range(1,len(alphabet)+1)),map(lambda x: str(x), range(1,len(alphabet)+1)) ))
+                            # {'1':'1', '2':'2', ...}
         self._possible_vowels = []
         self._possible_letters = {}
 
@@ -189,7 +188,7 @@ class Solver(object):
                     l[e] = l[e].rstrip('\n')
                     assert pattern.match(l[e]) is not None
         except AssertionError as ae:
-            print 'Error in input: validate failed.', ae
+            logapp('ERROR', 'Error in input: validate failed. ' + str(ae))
 
     def _flatten(self, square, n, m):
         patterns = []

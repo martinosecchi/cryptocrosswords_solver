@@ -1,0 +1,5 @@
+30 Nov 11:02:50.729264 [DEBUG] lw.py:115 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'1': 'h', '3': 'o', '2': 'e'}
+30 Nov 11:02:50.739270 [NOTICE] lw.py:37 __init__ - done loading dictionary.
+30 Nov 11:03:14.590589 [DEBUG] lw.py:115 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'1': 'h', '3': 'o', '2': 'e'}
+30 Nov 11:03:14.600497 [NOTICE] lw.py:37 __init__ - done loading dictionary.
+30 Nov 11:05:14.92499 [DEBUG] lw.py:114 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'1': 'h', '3': 'o', '2': 'e'}
