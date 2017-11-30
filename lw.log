@@ -3,3 +3,108 @@
 30 Nov 11:03:14.590589 [DEBUG] lw.py:115 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'1': 'h', '3': 'o', '2': 'e'}
 30 Nov 11:03:14.600497 [NOTICE] lw.py:37 __init__ - done loading dictionary.
 30 Nov 11:05:14.92499 [DEBUG] lw.py:114 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'1': 'h', '3': 'o', '2': 'e'}
+30 Nov 21:44:04.429143 [DEBUG] lw.py:139 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'1': 'h', '3': 'o', '2': 'e'}
+30 Nov 21:44:55.100302 [DEBUG] lw.py:139 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'1': 'h', '3': 'o', '2': 'e'}
+30 Nov 21:46:58.416129 [DEBUG] lw.py:139 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'1': 'h', '3': 'o', '2': 'e'}
+30 Nov 22:06:52.134980 [DEBUG] lw.py:161 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'1': 'h', '3': 'o', '2': 'e'}
+30 Nov 22:08:14.655536 [DEBUG] lw.py:161 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'1': 'h', '3': 'o', '2': 'e'}
+30 Nov 22:10:11.289331 [DEBUG] lw.py:161 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'1': 'h', '3': 'o', '2': 'e'}
+30 Nov 22:13:44.599149 [DEBUG] lw.py:166 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'1': 'h', '3': 'o', '2': 'e'}
+30 Nov 22:13:44.611873 [DEBUG] lw.py:83 search_pattern - 2
+['l']
+set([])
+{5: ['l']}
+30 Nov 22:13:44.612111 [DEBUG] lw.py:102 search_pattern - Adding all children.
+30 Nov 22:13:44.612281 [DEBUG] lw.py:83 search_pattern - 3
+['o']
+set([])
+{5: ['o']}
+30 Nov 22:13:44.612428 [DEBUG] lw.py:91 search_pattern - we are at next letter in pattern: l
+30 Nov 22:15:53.670756 [DEBUG] lw.py:166 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'1': 'h', '3': 'o', '2': 'e'}
+30 Nov 22:15:53.679482 [DEBUG] lw.py:83 search_pattern - 2
+['l']
+set([])
+{5: ['l']}
+30 Nov 22:15:53.679656 [DEBUG] lw.py:102 search_pattern - Adding all children.
+30 Nov 22:15:53.679779 [DEBUG] lw.py:83 search_pattern - 3
+['o']
+set([])
+{5: ['o']}
+30 Nov 22:15:53.679880 [DEBUG] lw.py:91 search_pattern - we are at next letter in pattern: l
+30 Nov 22:20:07.630687 [DEBUG] lw.py:169 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'1': 'h', '3': 'o', '2': 'e'}
+30 Nov 22:20:34.250605 [DEBUG] lw.py:169 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'1': 'h', '3': 'o', '2': 'e'}
+30 Nov 22:20:34.259835 [DEBUG] lw.py:66 search_pattern - Searching for pattern 1,2,l,l,3
+30 Nov 22:20:34.260334 [DEBUG] lw.py:84 search_pattern - 2
+['l']
+set([])
+{5: ['l']}
+30 Nov 22:20:34.260484 [DEBUG] lw.py:103 search_pattern - Adding all children.
+30 Nov 22:20:34.260747 [DEBUG] lw.py:84 search_pattern - 3
+['o']
+set([])
+{5: ['o']}
+30 Nov 22:20:34.260911 [DEBUG] lw.py:92 search_pattern - we are at next letter in pattern: l
+30 Nov 22:22:54.610598 [DEBUG] lw.py:169 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'1': 'h', '3': 'o', '2': 'e'}
+30 Nov 22:22:54.619896 [DEBUG] lw.py:66 search_pattern - Searching for pattern 1,2,l,l,3
+30 Nov 22:22:54.620121 [DEBUG] lw.py:84 search_pattern - 3
+['i', 'l', 'o']
+set([])
+{5: ['o', 'l'], 6: ['i']}
+30 Nov 22:22:54.620234 [DEBUG] lw.py:103 search_pattern - Adding all children.
+30 Nov 22:22:54.620361 [DEBUG] lw.py:84 search_pattern - 4
+['o']
+set([])
+{5: ['o']}
+30 Nov 22:22:54.620493 [DEBUG] lw.py:92 search_pattern - we are at next letter in pattern: l
+30 Nov 22:22:54.620610 [DEBUG] lw.py:84 search_pattern - 4
+['w']
+set([])
+{5: ['w']}
+30 Nov 22:22:54.620711 [DEBUG] lw.py:103 search_pattern - Adding all children.
+30 Nov 22:22:54.620825 [DEBUG] lw.py:84 search_pattern - -1
+[]
+set(['allow'])
+{}
+30 Nov 22:26:54.42123 [DEBUG] lw.py:169 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'1': 'h', '3': 'o', '2': 'e'}
+30 Nov 22:30:33.349966 [DEBUG] lw.py:170 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'1': 'h', '3': 'o', '2': 'e'}
+30 Nov 22:30:33.358714 [DEBUG] lw.py:67 search_pattern - Searching for pattern 1,2,l,l,3
+30 Nov 22:30:33.359010 [DEBUG] lw.py:85 search_pattern - 3
+['i', 'l', 'o']
+set([])
+{5: ['o', 'l'], 6: ['i']}
+30 Nov 22:30:33.359169 [DEBUG] lw.py:93 search_pattern - we are at next letter in pattern: l
+30 Nov 22:30:33.359367 [DEBUG] lw.py:99 search_pattern - there is a path from here, adding child.
+30 Nov 22:30:33.359541 [DEBUG] lw.py:85 search_pattern - 4
+['o']
+set([])
+{5: ['o']}
+30 Nov 22:30:33.359727 [DEBUG] lw.py:104 search_pattern - Adding all children.
+30 Nov 22:30:33.359905 [DEBUG] lw.py:85 search_pattern - 5
+[]
+set(['hello'])
+{}
+30 Nov 22:30:33.360076 [DEBUG] lw.py:89 search_pattern - Adding words: set(['hello'])
+30 Nov 22:30:33.360278 [DEBUG] lw.py:170 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'1': 'h', '3': 'o', '2': 'e'}
+30 Nov 22:30:33.360463 [DEBUG] lw.py:67 search_pattern - Searching for pattern 1,e,4,4,o
+30 Nov 22:30:33.360755 [DEBUG] lw.py:85 search_pattern - 2
+['n', 'b', 'l', 'f']
+set([])
+{9: ['f'], 5: ['l'], 7: ['n', 'b']}
+30 Nov 22:30:33.360892 [DEBUG] lw.py:104 search_pattern - Adding all children.
+30 Nov 22:30:33.361080 [DEBUG] lw.py:85 search_pattern - 3
+['l']
+set([])
+{5: ['l']}
+30 Nov 22:30:33.361271 [DEBUG] lw.py:104 search_pattern - Adding all children.
+30 Nov 22:30:33.361455 [DEBUG] lw.py:85 search_pattern - 4
+['o']
+set([])
+{5: ['o']}
+30 Nov 22:30:33.361647 [DEBUG] lw.py:93 search_pattern - we are at next letter in pattern: o
+30 Nov 22:30:33.361776 [DEBUG] lw.py:99 search_pattern - there is a path from here, adding child.
+30 Nov 22:30:33.361964 [DEBUG] lw.py:85 search_pattern - 5
+[]
+set(['hello'])
+{}
+30 Nov 22:30:33.362169 [DEBUG] lw.py:89 search_pattern - Adding words: set(['hello'])
+30 Nov 22:30:33.362324 [DEBUG] lw.py:170 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'1': 'h', '4': 'l'}

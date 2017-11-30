@@ -5,6 +5,7 @@ import json
 import os, sys
 import re
 from logger import logapp
+from Queue import LifoQueue as Stack
 
 alphabet = [l for l in 'abcdefghijklmnopqrstuvwxyz']
 testwords = list(set('hello wikipedia is a free online encyclopedia with the aim to allow anyone to edit articles wikipedia is the largest and most popular general reference work on the internet and is ranked the fifth most popular website'.split(' ')))
@@ -12,17 +13,18 @@ testwords = list(set('hello wikipedia is a free online encyclopedia with the aim
 class Node(object):
     def __init__(self):
         self.children = {}
-        self.words = {}
+        self.words = set()
         self.lengths = {}
+        self.level = -1
     def has_words(self):
-        return len(self.words) > 0
+        return len(self.words) 
     def __str__(self):
-        return str(self.children.keys()) + "\n" + str(self.words.keys()) + "\n" + str(self.lengths)
+        return str(self.level) + '\n' + str(self.children.keys()) + "\n" + str(self.words) + "\n" + str(self.lengths)
 
 class Trie(object):
     def __init__(self, words):
         self.max_length = max([len(w) for w in words])
-        self.layer = dict(zip(range(1, self.max_length+1), [Node() for n in range(self.max_length)]))
+        self.layer = dict(zip(range(self.max_length), [Node() for n in range(self.max_length)]))
         # {1: root, 2: root, 3: root, ...}
         print('loading words from dictionary..')
         n = 0.0
@@ -32,24 +34,28 @@ class Trie(object):
             sys.stdout.flush()
             n+=1
             for i in range(len(word)):
-                self.insert(i+1, word[i:], word)
+                self.insert(i, word[i:], word)
         print('done loading dictionary.')
 
     def insert(self, layer, letters, word):
         node = self.layer[layer]
+        i = 0
         for l in letters:
             if not node.children.get(l):
                 node.children[l] = Node()
+                node.level = i + layer 
+            i+=1
             if node.lengths.has_key(len(word)):
                 if l not in node.lengths[len(word)]:
                     node.lengths[len(word)].append(l)
             else:
                 node.lengths[len(word)] = [l]
             node = node.children[l]
-        node.words[word] = word  
+        node.words.update([word])
+        node.level = len(word)
 
     def search_word(self, word):
-        node = self.layer[1]
+        node = self.layer[0]
         for i in range(len(word)):
             if node.lengths.has_key(len(word)) and word[i] in node.lengths[len(word)]:
                 node = node.children[word[i]]
@@ -57,13 +63,52 @@ class Trie(object):
                 return False
         return word in node.words
 
-    def search_pattern(self, pattern):
-        if p.has_letters():
+    def search_pattern(self, p):
+        logapp('DEBUG', 'Searching for pattern ' + str(p))
+        has_letters = p.has_letters()
+        if has_letters:
             # take the letters, and positions. then start searching from the layer corresponding to the first position
             # extensive search of all the children at least until the next known position in the word, but only from the ones who
             # lead to a word of the desired size
             # in the end, check all the words I find with pattern.check
-            pass
+            indexes, letters = p.get_letters_at_positions()
+            words = set()
+            s = Stack()
+            i = 0
+            s.put(self.layer[indexes[i]].children[letters[i]])
+            has_letters += -1
+            i += 1
+
+            # DFS
+            while not s.empty():
+                node = s.get_nowait()
+                logapp('DEBUG', str(node))
+                # need to know which level we at, so I can compare also the other indexes/letters and check for words
+                if node.level == p.length:
+                    # get me those words son
+                    logapp('DEBUG', 'Adding words: ' + str(node.words))
+                    words = words.union(node.words)
+                elif node.lengths.has_key(p.length):
+                    if has_letters and node.level == indexes[i]:
+                        logapp('DEBUG', 'we are at next letter in pattern: ' + letters[i])
+                        #are we at level of next letter?
+                        # put only the child that checks with the next letter
+                        # BUT only if it goes to a word of the right length
+                        if letters[i] in node.lengths[p.length]:
+                            s.put(node.children[letters[i]])
+                            logapp('DEBUG', 'there is a path from here, adding child.')
+                        i += 1
+                        has_letters += -1
+                    else:
+                        # put all the childs that go to a word of the right length
+                        logapp('DEBUG', 'Adding all children.')
+                        for child in node.lengths[p.length]:
+                            s.put(node.children[child])
+            result = set()
+            for word in words:
+                if p.check(word):
+                    result.update([word])
+            return result
         else:
             # best avoid, this might as well be linear search.
             # look if there are repetitions of letters and their positions, then look in the different layers at the corresponding positions
@@ -75,12 +120,23 @@ class Pattern(object):
     def __init__(self, array, solution):
         self.array_form = array # only numbers
         self.solution = solution # shared object
+        self.length = len(self.array_form)
         self._letter = re.compile(r'^[a-z]{1}$')
         self._number = re.compile(r'^[0-9]{1,2}$')
+    def __str__(self):
+        return ','.join([x if not self.solution.get(x) else self.solution[x] for x in self.array_form])
+    def get_letters_at_positions(self):
+        indexes = []
+        letters = []
+        for i in range(len(self.array_form)):
+            if self.solution.get(self.array_form[i]):
+                indexes.append(i)
+                letters.append(self.solution.get(self.array_form[i]))
+        return indexes, letters
     def has_letters(self):
         letters = 0
         for x in self.array_form:
-            if self._isletter(self.solution.get(x)):
+            if self._isletter(self.solution.get(x) or '1'):
                 letters += 1
         return letters
     def _isletter(self, x):
@@ -148,14 +204,12 @@ def load_italian(filename="parole.txt"):
 class Solver(object):
     def __init__(self, dictionary, inputfn):
         self.t = Trie(load_italian(dictionary))
-        self.patterns, self.hints = self.parse_input(inputfn)
+        self.patterns = []
+        self.hints = {}
         self.solution = {}  #dict(zip(map(lambda x: str(x), range(1,len(alphabet)+1)),map(lambda x: str(x), range(1,len(alphabet)+1)) ))
                             # {'1':'1', '2':'2', ...}
         self._possible_vowels = []
         self._possible_letters = {}
-
-        for k,v in self.hints.items():
-            self.solution[k] = v
 
     def _is_vowel(self, letter):
         return letter in 'aeiou'
@@ -209,3 +263,14 @@ class Solver(object):
                     patterns.append(word) if len(word) > 1 else None
                     word = []
         return patterns
+
+    def _create_patterns(self, arrays):
+        for a in arrays:
+            self.patterns.append(Pattern(a, self.solution))
+
+    def solve(self):
+        pattern_arays, self.hints = self.parse_input(inputfn)
+        for k,v in self.hints.items():
+            self.solution[k] = v
+        self._create_patterns(pattern_arays)
+        # ....
