@@ -1,16 +1,27 @@
 TODO
 
-29 Nov
+29 Nov -
+1 Dec
+
 instead of creating a new trie for each layer, 
 is it possible to keep a single reference of each sublayer when building layer 1?
 need to brainstorm
+Not possible in the same way as it is now, but having introduced node.level now gave me an intuition.
+If there was a way to group all the nodes for level, instead of creating a new subtrie for each layer
+There might be less preprocessing / less memory size.
+I would expect the data structure to be more packed though, as it would condense all the layers
+or actually just make layer 0 more accessible.
+For now it is not obvious how to do it, now each layer has 1 root, but if I condense them it means that for layer 1 I would need to group all of the children of layer0's root into a new accessible root for layer 1.
+That doesn't sound more efficient than what I have now, if anything it's the same but more difficult to do.
+What I am really looking for would be a way of working only with the single layer 0 trie.
+Nope, can't think of anything else.
 
+
+29 Nov
 also, I need to come up with a good test input and reduced dictionary to test correctness
 
 
-
-
-early note:
+early days
 search method, include hints like length and letters in which positions
 for crypto pattern too (given by numbers)
 

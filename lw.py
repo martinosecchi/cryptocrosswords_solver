@@ -8,7 +8,7 @@ from logger import logapp
 from Queue import LifoQueue as Stack
 
 alphabet = [l for l in 'abcdefghijklmnopqrstuvwxyz']
-testwords = list(set('hello wikipedia is a free online encyclopedia with the aim to allow anyone to edit articles wikipedia is the largest and most popular general reference work on the internet and is ranked the fifth most popular website'.split(' ')))
+testwords = list(set('hello callo bollo messo tetto wikipedia is a free online encyclopedia with the aim to allow anyone to edit articles wikipedia is the largest and most popular general reference work on the internet and is ranked the fifth most popular website'.split(' ')))
 
 class Node(object):
     def __init__(self):
@@ -63,58 +63,65 @@ class Trie(object):
                 return False
         return word in node.words
 
-    def search_pattern(self, p):
-        logapp('DEBUG', 'Searching for pattern ' + str(p))
-        has_letters = p.has_letters()
+    def search_pattern(self, pattern):
+        logapp('DEBUG', 'Searching for pattern ' + str(pattern))
+        has_letters = pattern.has_letters()
         if has_letters:
             # take the letters, and positions. then start searching from the layer corresponding to the first position
             # extensive search of all the children at least until the next known position in the word, but only from the ones who
             # lead to a word of the desired size
             # in the end, check all the words I find with pattern.check
-            indexes, letters = p.get_letters_at_positions()
-            words = set()
-            s = Stack()
-            i = 0
-            s.put(self.layer[indexes[i]].children[letters[i]])
-            has_letters += -1
-            i += 1
-
-            # DFS
-            while not s.empty():
-                node = s.get_nowait()
-                logapp('DEBUG', str(node))
-                # need to know which level we at, so I can compare also the other indexes/letters and check for words
-                if node.level == p.length:
-                    # get me those words son
-                    logapp('DEBUG', 'Adding words: ' + str(node.words))
-                    words = words.union(node.words)
-                elif node.lengths.has_key(p.length):
-                    if has_letters and node.level == indexes[i]:
-                        logapp('DEBUG', 'we are at next letter in pattern: ' + letters[i])
-                        #are we at level of next letter?
-                        # put only the child that checks with the next letter
-                        # BUT only if it goes to a word of the right length
-                        if letters[i] in node.lengths[p.length]:
-                            s.put(node.children[letters[i]])
-                            logapp('DEBUG', 'there is a path from here, adding child.')
-                        i += 1
-                        has_letters += -1
-                    else:
-                        # put all the childs that go to a word of the right length
-                        logapp('DEBUG', 'Adding all children.')
-                        for child in node.lengths[p.length]:
-                            s.put(node.children[child])
-            result = set()
-            for word in words:
-                if p.check(word):
-                    result.update([word])
-            return result
+            return self._searchp_with_letters(pattern, has_letters)
         else:
             # best avoid, this might as well be linear search.
             # look if there are repetitions of letters and their positions, then look in the different layers at the corresponding positions
             # test the pattern on those words that have the right length
             # (set operations)
+            # I can create a new pattern for every possibility I find and give it some letters, then do the letter search
+            # e.g. if I get 1,2,1,1,3 of length 5, I look in layer 0 what letters go to 5, then create a pattern for each letter
+            # BUT only if that letter is also in the other layers where it's supposed to be (constant time lookup)
+            # Pattern([1,2,1,1,3], {1: letter}) and search for that
+            # could do this for the most common letter, and then check the pattern
+            # is there a more efficient way? probably
             pass
+
+    def _searchp_with_letters(self, p, has_letters):
+        indexes, letters = p.get_letters_at_positions()
+        words = set()
+        s = Stack()
+        i = 0
+        s.put(self.layer[indexes[i]].children[letters[i]])
+        has_letters += -1
+        i += 1
+
+        # DFS
+        while not s.empty():
+            node = s.get_nowait()
+            logapp('DEBUG', str(node))
+            # need to know which level we at, so I can compare also the other indexes/letters and check for words
+            if node.level == p.length:
+                # get me those words son
+                logapp('DEBUG', 'Adding words if they match: ' + str(node.words))
+                for word in node.words:
+                    if p.check(word):
+                        words.update([word])
+            elif node.lengths.has_key(p.length):
+                if has_letters and node.level == indexes[i]:
+                    logapp('DEBUG', 'we are at next letter in pattern: ' + letters[i])
+                    #are we at level of next letter?
+                    # put only the child that checks with the next letter
+                    # BUT only if it goes to a word of the right length
+                    if letters[i] in node.lengths[p.length]:
+                        s.put(node.children[letters[i]])
+                        logapp('DEBUG', 'there is a path from here, adding child.')
+                    i += 1
+                    has_letters += -1
+                else:
+                    # put all the childs that go to a word of the right length
+                    logapp('DEBUG', 'Adding all children.')
+                    for child in node.lengths[p.length]:
+                        s.put(node.children[child])
+        return words
 
 class Pattern(object):
     def __init__(self, array, solution):

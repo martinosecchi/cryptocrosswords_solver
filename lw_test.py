@@ -16,6 +16,6 @@ def test_trie():
 	assert t.layer[0].children['h'].children['e'].level == 2
 	assert t.layer[1].children['e'].level == 2
 	assert t.layer[4].children['o'].level == 5
-	assert t.search_pattern(Pattern(['1', '2', '4', '4', '3'], {'4':'l'}))
-	assert t.search_pattern(Pattern(['1', '2', '4', '4', '3'], {'2':'e', '3':'o'}))
+	assert t.search_pattern(Pattern(['1', '2', '4', '4', '3'], {'4':'l'})) == set(['hello', 'callo']) #no bollo
+	assert t.search_pattern(Pattern(['1', '2', '4', '4', '3'], {'2':'e', '3':'o'})) == set(['hello', 'messo']) #no tetto
 test_trie()
