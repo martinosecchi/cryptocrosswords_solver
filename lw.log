@@ -257,3 +257,461 @@ set(['messo'])
 {}
 01 Dec 10:07:10.979549 [DEBUG] lw.py:104 _searchp_with_letters - Adding words if they match: set(['messo'])
 01 Dec 10:07:10.979735 [DEBUG] lw.py:177 check - testing word messo - reconstructed as: ['m', 'e', 's', 's', 'o'] testsolution {'1': 'm', '4': 's'}
+03 Dec 15:30:06.677543 [DEBUG] lw.py:67 search_pattern - Searching for pattern 1,2,1,1,3
+03 Dec 15:31:00.644568 [DEBUG] lw.py:67 search_pattern - Searching for pattern 1,2,1,1,3
+03 Dec 15:31:47.899100 [DEBUG] lw.py:67 search_pattern - Searching for pattern 1,2,1,1,3
+03 Dec 15:32:39.814590 [DEBUG] lw.py:67 search_pattern - Searching for pattern 1,2,1,1,3
+03 Dec 15:32:39.822163 [DEBUG] lw.py:113 _searchp_with_letters - 1
+['h', 'e', 'o']
+set([])
+{2: ['o'], 3: ['h'], 5: ['e']}
+03 Dec 15:32:39.822328 [DEBUG] lw.py:134 _searchp_with_letters - Adding all children.
+03 Dec 15:32:39.822595 [DEBUG] lw.py:113 _searchp_with_letters - 2
+['t']
+set([])
+{5: ['t']}
+03 Dec 15:32:39.823266 [DEBUG] lw.py:134 _searchp_with_letters - Adding all children.
+03 Dec 15:32:39.823467 [DEBUG] lw.py:113 _searchp_with_letters - 3
+['t']
+set([])
+{5: ['t']}
+03 Dec 15:32:39.823636 [DEBUG] lw.py:134 _searchp_with_letters - Adding all children.
+03 Dec 15:32:39.823824 [DEBUG] lw.py:113 _searchp_with_letters - 4
+['o']
+set([])
+{5: ['o']}
+03 Dec 15:32:39.823973 [DEBUG] lw.py:134 _searchp_with_letters - Adding all children.
+03 Dec 15:32:39.824141 [DEBUG] lw.py:113 _searchp_with_letters - 5
+[]
+set(['tetto'])
+{}
+03 Dec 15:32:39.824290 [DEBUG] lw.py:117 _searchp_with_letters - Adding words if they match: set(['tetto'])
+03 Dec 15:32:39.824482 [DEBUG] lw.py:190 check - testing word tetto - reconstructed as: ['t', 'e', 't', 't', 'o'] testsolution {'3': 'o', '2': 'e'}
+03 Dec 15:32:50.748534 [DEBUG] lw.py:67 search_pattern - Searching for pattern 1,2,1,1,2
+03 Dec 15:32:50.749071 [DEBUG] lw.py:113 _searchp_with_letters - 1
+['h', 'e', 'o']
+set([])
+{2: ['o'], 3: ['h'], 5: ['e']}
+03 Dec 15:32:50.749279 [DEBUG] lw.py:134 _searchp_with_letters - Adding all children.
+03 Dec 15:32:50.753488 [DEBUG] lw.py:113 _searchp_with_letters - 2
+['t']
+set([])
+{5: ['t']}
+03 Dec 15:32:50.753703 [DEBUG] lw.py:134 _searchp_with_letters - Adding all children.
+03 Dec 15:32:50.753940 [DEBUG] lw.py:113 _searchp_with_letters - 3
+['t']
+set([])
+{5: ['t']}
+03 Dec 15:32:50.754138 [DEBUG] lw.py:134 _searchp_with_letters - Adding all children.
+03 Dec 15:32:50.754431 [DEBUG] lw.py:113 _searchp_with_letters - 4
+['o']
+set([])
+{5: ['o']}
+03 Dec 15:32:50.754648 [DEBUG] lw.py:134 _searchp_with_letters - Adding all children.
+03 Dec 15:32:50.754870 [DEBUG] lw.py:113 _searchp_with_letters - 5
+[]
+set(['tetto'])
+{}
+03 Dec 15:32:50.755063 [DEBUG] lw.py:117 _searchp_with_letters - Adding words if they match: set(['tetto'])
+03 Dec 15:32:50.755291 [DEBUG] lw.py:190 check - testing word tetto - reconstructed as: ['t', 'e', 't', 't', 'e'] testsolution {'2': 'e'}
+03 Dec 15:32:57.492527 [DEBUG] lw.py:67 search_pattern - Searching for pattern 4,2,1,1,2
+03 Dec 15:32:57.493092 [DEBUG] lw.py:113 _searchp_with_letters - 3
+['s', 't']
+set([])
+{4: ['t'], 5: ['s']}
+03 Dec 15:32:57.493323 [DEBUG] lw.py:134 _searchp_with_letters - Adding all children.
+03 Dec 15:32:57.497466 [DEBUG] lw.py:113 _searchp_with_letters - 4
+['o']
+set([])
+{5: ['o']}
+03 Dec 15:32:57.497695 [DEBUG] lw.py:134 _searchp_with_letters - Adding all children.
+03 Dec 15:32:57.497933 [DEBUG] lw.py:113 _searchp_with_letters - 5
+[]
+set(['messo'])
+{}
+03 Dec 15:32:57.498142 [DEBUG] lw.py:117 _searchp_with_letters - Adding words if they match: set(['messo'])
+03 Dec 15:32:57.498384 [DEBUG] lw.py:190 check - testing word messo - reconstructed as: ['m', 'e', 's', 's', 'e'] testsolution {'2': 'e', '4': 'm'}
+03 Dec 15:32:57.498699 [DEBUG] lw.py:113 _searchp_with_letters - 3
+['i', 'h', 'e', 't']
+set([])
+{8: ['e', 'i'], 4: ['h'], 5: ['t']}
+03 Dec 15:32:57.498887 [DEBUG] lw.py:134 _searchp_with_letters - Adding all children.
+03 Dec 15:32:57.499110 [DEBUG] lw.py:113 _searchp_with_letters - 4
+['o']
+set([])
+{5: ['o']}
+03 Dec 15:32:57.499300 [DEBUG] lw.py:134 _searchp_with_letters - Adding all children.
+03 Dec 15:32:57.499504 [DEBUG] lw.py:113 _searchp_with_letters - 5
+[]
+set(['tetto'])
+{}
+03 Dec 15:32:57.499652 [DEBUG] lw.py:117 _searchp_with_letters - Adding words if they match: set(['tetto'])
+03 Dec 15:32:57.499827 [DEBUG] lw.py:190 check - testing word tetto - reconstructed as: ['t', 'e', 't', 't', 'e'] testsolution {'2': 'e', '4': 't'}
+03 Dec 15:32:57.500048 [DEBUG] lw.py:113 _searchp_with_letters - 3
+['i', 'l', 'o']
+set([])
+{5: ['l', 'o'], 6: ['i']}
+03 Dec 15:32:57.500192 [DEBUG] lw.py:134 _searchp_with_letters - Adding all children.
+03 Dec 15:32:57.500361 [DEBUG] lw.py:113 _searchp_with_letters - 4
+['w']
+set([])
+{5: ['w']}
+03 Dec 15:32:57.500502 [DEBUG] lw.py:134 _searchp_with_letters - Adding all children.
+03 Dec 15:32:57.500662 [DEBUG] lw.py:113 _searchp_with_letters - 5
+[]
+set(['allow'])
+{}
+03 Dec 15:32:57.500807 [DEBUG] lw.py:117 _searchp_with_letters - Adding words if they match: set(['allow'])
+03 Dec 15:32:57.500979 [DEBUG] lw.py:190 check - testing word allow - reconstructed as: ['a', 'l', 'l', 'l', 'l'] testsolution {'2': 'l', '4': 'a'}
+03 Dec 15:32:57.501141 [DEBUG] lw.py:113 _searchp_with_letters - 4
+['o']
+set([])
+{5: ['o']}
+03 Dec 15:32:57.501282 [DEBUG] lw.py:134 _searchp_with_letters - Adding all children.
+03 Dec 15:32:57.501444 [DEBUG] lw.py:113 _searchp_with_letters - 5
+[]
+set(['bollo', 'callo', 'hello'])
+{}
+03 Dec 15:32:57.501588 [DEBUG] lw.py:117 _searchp_with_letters - Adding words if they match: set(['bollo', 'callo', 'hello'])
+03 Dec 15:32:57.501759 [DEBUG] lw.py:190 check - testing word bollo - reconstructed as: ['b', 'o', 'l', 'l', 'o'] testsolution {'2': 'o', '4': 'b'}
+03 Dec 15:32:57.501932 [DEBUG] lw.py:190 check - testing word callo - reconstructed as: ['c', 'a', 'l', 'l', 'a'] testsolution {'2': 'a', '4': 'c'}
+03 Dec 15:32:57.502103 [DEBUG] lw.py:190 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'e'] testsolution {'2': 'e', '4': 'h'}
+03 Dec 15:33:03.148249 [DEBUG] lw.py:67 search_pattern - Searching for pattern 4,2,1,1,3
+03 Dec 15:33:03.148766 [DEBUG] lw.py:113 _searchp_with_letters - 3
+['s', 't']
+set([])
+{4: ['t'], 5: ['s']}
+03 Dec 15:33:03.148975 [DEBUG] lw.py:134 _searchp_with_letters - Adding all children.
+03 Dec 15:33:03.153179 [DEBUG] lw.py:113 _searchp_with_letters - 4
+['o']
+set([])
+{5: ['o']}
+03 Dec 15:33:03.153398 [DEBUG] lw.py:134 _searchp_with_letters - Adding all children.
+03 Dec 15:33:03.153633 [DEBUG] lw.py:113 _searchp_with_letters - 5
+[]
+set(['messo'])
+{}
+03 Dec 15:33:03.153902 [DEBUG] lw.py:117 _searchp_with_letters - Adding words if they match: set(['messo'])
+03 Dec 15:33:03.154147 [DEBUG] lw.py:190 check - testing word messo - reconstructed as: ['m', 'e', 's', 's', 'o'] testsolution {'3': 'o', '2': 'e', '4': 'm'}
+03 Dec 15:33:03.154461 [DEBUG] lw.py:113 _searchp_with_letters - 3
+['i', 'h', 'e', 't']
+set([])
+{8: ['e', 'i'], 4: ['h'], 5: ['t']}
+03 Dec 15:33:03.154648 [DEBUG] lw.py:134 _searchp_with_letters - Adding all children.
+03 Dec 15:33:03.154894 [DEBUG] lw.py:113 _searchp_with_letters - 4
+['o']
+set([])
+{5: ['o']}
+03 Dec 15:33:03.155086 [DEBUG] lw.py:134 _searchp_with_letters - Adding all children.
+03 Dec 15:33:03.155302 [DEBUG] lw.py:113 _searchp_with_letters - 5
+[]
+set(['tetto'])
+{}
+03 Dec 15:33:03.155496 [DEBUG] lw.py:117 _searchp_with_letters - Adding words if they match: set(['tetto'])
+03 Dec 15:33:03.155725 [DEBUG] lw.py:190 check - testing word tetto - reconstructed as: ['t', 'e', 't', 't', 'o'] testsolution {'3': 'o', '2': 'e', '4': 't'}
+03 Dec 15:33:03.156022 [DEBUG] lw.py:113 _searchp_with_letters - 3
+['i', 'l', 'o']
+set([])
+{5: ['l', 'o'], 6: ['i']}
+03 Dec 15:33:03.156203 [DEBUG] lw.py:134 _searchp_with_letters - Adding all children.
+03 Dec 15:33:03.156427 [DEBUG] lw.py:113 _searchp_with_letters - 4
+['w']
+set([])
+{5: ['w']}
+03 Dec 15:33:03.156614 [DEBUG] lw.py:134 _searchp_with_letters - Adding all children.
+03 Dec 15:33:03.156826 [DEBUG] lw.py:113 _searchp_with_letters - 5
+[]
+set(['allow'])
+{}
+03 Dec 15:33:03.157023 [DEBUG] lw.py:117 _searchp_with_letters - Adding words if they match: set(['allow'])
+03 Dec 15:33:03.157216 [DEBUG] lw.py:190 check - testing word allow - reconstructed as: ['a', 'l', 'l', 'l', 'w'] testsolution {'3': 'w', '2': 'l', '4': 'a'}
+03 Dec 15:33:03.157379 [DEBUG] lw.py:113 _searchp_with_letters - 4
+['o']
+set([])
+{5: ['o']}
+03 Dec 15:33:03.157520 [DEBUG] lw.py:134 _searchp_with_letters - Adding all children.
+03 Dec 15:33:03.157730 [DEBUG] lw.py:113 _searchp_with_letters - 5
+[]
+set(['bollo', 'callo', 'hello'])
+{}
+03 Dec 15:33:03.157900 [DEBUG] lw.py:117 _searchp_with_letters - Adding words if they match: set(['bollo', 'callo', 'hello'])
+03 Dec 15:33:03.158199 [DEBUG] lw.py:190 check - testing word callo - reconstructed as: ['c', 'a', 'l', 'l', 'o'] testsolution {'3': 'o', '2': 'a', '4': 'c'}
+03 Dec 15:33:03.158376 [DEBUG] lw.py:190 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'3': 'o', '2': 'e', '4': 'h'}
+03 Dec 15:33:55.459026 [DEBUG] lw.py:67 search_pattern - Searching for pattern 4,2,t,t,3
+03 Dec 15:33:55.459563 [DEBUG] lw.py:113 _searchp_with_letters - 3
+['i', 'h', 'e', 't']
+set([])
+{8: ['e', 'i'], 4: ['h'], 5: ['t']}
+03 Dec 15:33:55.459821 [DEBUG] lw.py:123 _searchp_with_letters - we are at next letter in pattern: t
+03 Dec 15:33:55.460110 [DEBUG] lw.py:129 _searchp_with_letters - there is a path from here, adding child.
+03 Dec 15:33:55.460345 [DEBUG] lw.py:113 _searchp_with_letters - 4
+['o']
+set([])
+{5: ['o']}
+03 Dec 15:33:55.460556 [DEBUG] lw.py:134 _searchp_with_letters - Adding all children.
+03 Dec 15:33:55.460779 [DEBUG] lw.py:113 _searchp_with_letters - 5
+[]
+set(['tetto'])
+{}
+03 Dec 15:33:55.460973 [DEBUG] lw.py:117 _searchp_with_letters - Adding words if they match: set(['tetto'])
+03 Dec 15:33:55.461151 [DEBUG] lw.py:190 check - testing word tetto - reconstructed as: ['t', 'e', 't', 't', 'o'] testsolution {'3': 'o', '2': 'e', '4': 't'}
+03 Dec 15:36:16.579321 [DEBUG] lw.py:67 search_pattern - Searching for pattern 1,2,1,1,3
+03 Dec 15:36:16.587026 [DEBUG] lw.py:89 search_pattern - most frequent symbol: 1
+03 Dec 15:36:16.587219 [DEBUG] lw.py:97 search_pattern - possible most frequent letter: set(['t'])
+03 Dec 15:36:16.587482 [DEBUG] lw.py:115 _searchp_with_letters - 1
+['h', 'e', 'o']
+set([])
+{2: ['o'], 3: ['h'], 5: ['e']}
+03 Dec 15:36:16.587631 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:36:16.587853 [DEBUG] lw.py:115 _searchp_with_letters - 2
+['t']
+set([])
+{5: ['t']}
+03 Dec 15:36:16.588497 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:36:16.588669 [DEBUG] lw.py:115 _searchp_with_letters - 3
+['t']
+set([])
+{5: ['t']}
+03 Dec 15:36:16.588836 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:36:16.589024 [DEBUG] lw.py:115 _searchp_with_letters - 4
+['o']
+set([])
+{5: ['o']}
+03 Dec 15:36:16.589164 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:36:16.589355 [DEBUG] lw.py:115 _searchp_with_letters - 5
+[]
+set(['tetto'])
+{}
+03 Dec 15:36:16.589497 [DEBUG] lw.py:119 _searchp_with_letters - Adding words if they match: set(['tetto'])
+03 Dec 15:36:16.589687 [DEBUG] lw.py:192 check - testing word tetto - reconstructed as: ['t', 'e', 't', 't', 'o'] testsolution {'3': 'o', '2': 'e'}
+03 Dec 15:36:24.614305 [DEBUG] lw.py:67 search_pattern - Searching for pattern 4,2,1,1,3
+03 Dec 15:36:24.615277 [DEBUG] lw.py:89 search_pattern - most frequent symbol: 1
+03 Dec 15:36:24.615553 [DEBUG] lw.py:97 search_pattern - possible most frequent letter: set(['s', 't', 'l'])
+03 Dec 15:36:24.619283 [DEBUG] lw.py:115 _searchp_with_letters - 3
+['s', 't']
+set([])
+{4: ['t'], 5: ['s']}
+03 Dec 15:36:24.619519 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:36:24.619754 [DEBUG] lw.py:115 _searchp_with_letters - 4
+['o']
+set([])
+{5: ['o']}
+03 Dec 15:36:24.619945 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:36:24.620162 [DEBUG] lw.py:115 _searchp_with_letters - 5
+[]
+set(['messo'])
+{}
+03 Dec 15:36:24.620352 [DEBUG] lw.py:119 _searchp_with_letters - Adding words if they match: set(['messo'])
+03 Dec 15:36:24.620580 [DEBUG] lw.py:192 check - testing word messo - reconstructed as: ['m', 'e', 's', 's', 'o'] testsolution {'3': 'o', '2': 'e', '4': 'm'}
+03 Dec 15:36:24.620874 [DEBUG] lw.py:115 _searchp_with_letters - 3
+['i', 'h', 'e', 't']
+set([])
+{8: ['e', 'i'], 4: ['h'], 5: ['t']}
+03 Dec 15:36:24.621060 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:36:24.621271 [DEBUG] lw.py:115 _searchp_with_letters - 4
+['o']
+set([])
+{5: ['o']}
+03 Dec 15:36:24.621452 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:36:24.621659 [DEBUG] lw.py:115 _searchp_with_letters - 5
+[]
+set(['tetto'])
+{}
+03 Dec 15:36:24.621842 [DEBUG] lw.py:119 _searchp_with_letters - Adding words if they match: set(['tetto'])
+03 Dec 15:36:24.622060 [DEBUG] lw.py:192 check - testing word tetto - reconstructed as: ['t', 'e', 't', 't', 'o'] testsolution {'3': 'o', '2': 'e', '4': 't'}
+03 Dec 15:36:24.622339 [DEBUG] lw.py:115 _searchp_with_letters - 3
+['i', 'l', 'o']
+set([])
+{5: ['l', 'o'], 6: ['i']}
+03 Dec 15:36:24.622519 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:36:24.622726 [DEBUG] lw.py:115 _searchp_with_letters - 4
+['w']
+set([])
+{5: ['w']}
+03 Dec 15:36:24.622861 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:36:24.623014 [DEBUG] lw.py:115 _searchp_with_letters - 5
+[]
+set(['allow'])
+{}
+03 Dec 15:36:24.623150 [DEBUG] lw.py:119 _searchp_with_letters - Adding words if they match: set(['allow'])
+03 Dec 15:36:24.623314 [DEBUG] lw.py:192 check - testing word allow - reconstructed as: ['a', 'l', 'l', 'l', 'w'] testsolution {'3': 'w', '2': 'l', '4': 'a'}
+03 Dec 15:36:24.623468 [DEBUG] lw.py:115 _searchp_with_letters - 4
+['o']
+set([])
+{5: ['o']}
+03 Dec 15:36:24.623600 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:36:24.623754 [DEBUG] lw.py:115 _searchp_with_letters - 5
+[]
+set(['bollo', 'callo', 'hello'])
+{}
+03 Dec 15:36:24.623890 [DEBUG] lw.py:119 _searchp_with_letters - Adding words if they match: set(['bollo', 'callo', 'hello'])
+03 Dec 15:36:24.624085 [DEBUG] lw.py:192 check - testing word callo - reconstructed as: ['c', 'a', 'l', 'l', 'o'] testsolution {'3': 'o', '2': 'a', '4': 'c'}
+03 Dec 15:36:24.624250 [DEBUG] lw.py:192 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'3': 'o', '2': 'e', '4': 'h'}
+03 Dec 15:40:37.987213 [DEBUG] lw.py:192 check - testing word tetto - reconstructed as: ['t', 'e', 't', 't', 'o'] testsolution {'3': 'o', '2': 'e'}
+03 Dec 15:42:00.537854 [DEBUG] lw.py:192 check - testing word tetto - reconstructed as: ['t', 'e', 't', 't', 'o'] testsolution {'3': 'o', '2': 'e', '4': 't'}
+03 Dec 15:44:39.220495 [DEBUG] lw.py:192 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'1': 'h', '3': 'o', '2': 'e'}
+03 Dec 15:44:39.225675 [DEBUG] lw.py:192 check - testing word tetto - reconstructed as: ['t', 'e', 't', 't', 'o'] testsolution {'3': 'o', '2': 'e', '4': 't'}
+03 Dec 15:48:56.528455 [DEBUG] lw.py:192 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'1': 'h', '3': 'o', '2': 'e'}
+03 Dec 15:48:56.539749 [DEBUG] lw.py:67 search_pattern - Searching for pattern 1,2,l,l,3
+03 Dec 15:48:56.540282 [DEBUG] lw.py:115 _searchp_with_letters - 3
+['i', 'l', 'o']
+set([])
+{5: ['l', 'o'], 6: ['i']}
+03 Dec 15:48:56.540529 [DEBUG] lw.py:125 _searchp_with_letters - we are at next letter in pattern: l
+03 Dec 15:48:56.540764 [DEBUG] lw.py:131 _searchp_with_letters - there is a path from here, adding child.
+03 Dec 15:48:56.541019 [DEBUG] lw.py:115 _searchp_with_letters - 4
+['o']
+set([])
+{5: ['o']}
+03 Dec 15:48:56.541171 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:48:56.541342 [DEBUG] lw.py:115 _searchp_with_letters - 5
+[]
+set(['bollo', 'callo', 'hello'])
+{}
+03 Dec 15:48:56.541481 [DEBUG] lw.py:119 _searchp_with_letters - Adding words if they match: set(['bollo', 'callo', 'hello'])
+03 Dec 15:48:56.541675 [DEBUG] lw.py:192 check - testing word callo - reconstructed as: ['c', 'a', 'l', 'l', 'o'] testsolution {'1': 'c', '3': 'o', '2': 'a'}
+03 Dec 15:48:56.541831 [DEBUG] lw.py:192 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'1': 'h', '3': 'o', '2': 'e'}
+03 Dec 15:48:56.541986 [DEBUG] lw.py:67 search_pattern - Searching for pattern 1,e,4,4,o
+03 Dec 15:48:56.542175 [DEBUG] lw.py:115 _searchp_with_letters - 2
+['b', 'f', 'l', 'n', 's', 't']
+set([])
+{9: ['f'], 5: ['s', 't', 'l'], 7: ['n', 'b']}
+03 Dec 15:48:56.542299 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:48:56.542478 [DEBUG] lw.py:115 _searchp_with_letters - 3
+['l']
+set([])
+{5: ['l']}
+03 Dec 15:48:56.542703 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:48:56.542875 [DEBUG] lw.py:115 _searchp_with_letters - 4
+['o']
+set([])
+{5: ['o']}
+03 Dec 15:48:56.542995 [DEBUG] lw.py:125 _searchp_with_letters - we are at next letter in pattern: o
+03 Dec 15:48:56.543139 [DEBUG] lw.py:131 _searchp_with_letters - there is a path from here, adding child.
+03 Dec 15:48:56.543293 [DEBUG] lw.py:115 _searchp_with_letters - 5
+[]
+set(['hello'])
+{}
+03 Dec 15:48:56.543413 [DEBUG] lw.py:119 _searchp_with_letters - Adding words if they match: set(['hello'])
+03 Dec 15:48:56.543680 [DEBUG] lw.py:192 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'1': 'h', '4': 'l'}
+03 Dec 15:48:56.543859 [DEBUG] lw.py:115 _searchp_with_letters - 3
+['t']
+set([])
+{5: ['t']}
+03 Dec 15:48:56.543992 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:48:56.544160 [DEBUG] lw.py:115 _searchp_with_letters - 4
+['o']
+set([])
+{5: ['o']}
+03 Dec 15:48:56.544278 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:48:56.544431 [DEBUG] lw.py:115 _searchp_with_letters - 5
+[]
+set(['tetto'])
+{}
+03 Dec 15:48:56.544566 [DEBUG] lw.py:119 _searchp_with_letters - Adding words if they match: set(['tetto'])
+03 Dec 15:48:56.544750 [DEBUG] lw.py:115 _searchp_with_letters - 3
+['s']
+set([])
+{5: ['s']}
+03 Dec 15:48:56.544880 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:48:56.545040 [DEBUG] lw.py:115 _searchp_with_letters - 4
+['o']
+set([])
+{5: ['o']}
+03 Dec 15:48:56.545201 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:48:56.545431 [DEBUG] lw.py:115 _searchp_with_letters - 5
+[]
+set(['messo'])
+{}
+03 Dec 15:48:56.545651 [DEBUG] lw.py:119 _searchp_with_letters - Adding words if they match: set(['messo'])
+03 Dec 15:48:56.545994 [DEBUG] lw.py:192 check - testing word messo - reconstructed as: ['m', 'e', 's', 's', 'o'] testsolution {'1': 'm', '4': 's'}
+03 Dec 15:48:56.546200 [DEBUG] lw.py:67 search_pattern - Searching for pattern 1,2,1,1,3
+03 Dec 15:48:56.546345 [DEBUG] lw.py:89 search_pattern - most frequent symbol: 1
+03 Dec 15:48:56.546525 [DEBUG] lw.py:97 search_pattern - possible most frequent letter: set(['t'])
+03 Dec 15:48:56.546761 [DEBUG] lw.py:115 _searchp_with_letters - 1
+['h', 'e', 'o']
+set([])
+{2: ['o'], 3: ['h'], 5: ['e']}
+03 Dec 15:48:56.546919 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:48:56.547148 [DEBUG] lw.py:115 _searchp_with_letters - 2
+['t']
+set([])
+{5: ['t']}
+03 Dec 15:48:56.547314 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:48:56.547475 [DEBUG] lw.py:115 _searchp_with_letters - 3
+['t']
+set([])
+{5: ['t']}
+03 Dec 15:48:56.547629 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:48:56.547811 [DEBUG] lw.py:115 _searchp_with_letters - 4
+['o']
+set([])
+{5: ['o']}
+03 Dec 15:48:56.547951 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:48:56.548119 [DEBUG] lw.py:115 _searchp_with_letters - 5
+[]
+set(['tetto'])
+{}
+03 Dec 15:48:56.548614 [DEBUG] lw.py:119 _searchp_with_letters - Adding words if they match: set(['tetto'])
+03 Dec 15:48:56.548849 [DEBUG] lw.py:192 check - testing word tetto - reconstructed as: ['t', 'e', 't', 't', 'o'] testsolution {'3': 'o', '2': 'e'}
+03 Dec 15:48:56.549027 [DEBUG] lw.py:67 search_pattern - Searching for pattern 4,2,1,1,3
+03 Dec 15:48:56.549189 [DEBUG] lw.py:89 search_pattern - most frequent symbol: 1
+03 Dec 15:48:56.549344 [DEBUG] lw.py:97 search_pattern - possible most frequent letter: set(['s', 't', 'l'])
+03 Dec 15:48:56.549564 [DEBUG] lw.py:115 _searchp_with_letters - 3
+['s', 't']
+set([])
+{4: ['t'], 5: ['s']}
+03 Dec 15:48:56.549726 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:48:56.549966 [DEBUG] lw.py:115 _searchp_with_letters - 4
+['o']
+set([])
+{5: ['o']}
+03 Dec 15:48:56.550277 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:48:56.550489 [DEBUG] lw.py:115 _searchp_with_letters - 5
+[]
+set(['messo'])
+{}
+03 Dec 15:48:56.550641 [DEBUG] lw.py:119 _searchp_with_letters - Adding words if they match: set(['messo'])
+03 Dec 15:48:56.550833 [DEBUG] lw.py:192 check - testing word messo - reconstructed as: ['m', 'e', 's', 's', 'o'] testsolution {'3': 'o', '2': 'e', '4': 'm'}
+03 Dec 15:48:56.551076 [DEBUG] lw.py:115 _searchp_with_letters - 3
+['i', 'h', 'e', 't']
+set([])
+{8: ['e', 'i'], 4: ['h'], 5: ['t']}
+03 Dec 15:48:56.551234 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:48:56.551394 [DEBUG] lw.py:115 _searchp_with_letters - 4
+['o']
+set([])
+{5: ['o']}
+03 Dec 15:48:56.551531 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:48:56.551715 [DEBUG] lw.py:115 _searchp_with_letters - 5
+[]
+set(['tetto'])
+{}
+03 Dec 15:48:56.551890 [DEBUG] lw.py:119 _searchp_with_letters - Adding words if they match: set(['tetto'])
+03 Dec 15:48:56.552206 [DEBUG] lw.py:115 _searchp_with_letters - 3
+['i', 'l', 'o']
+set([])
+{5: ['l', 'o'], 6: ['i']}
+03 Dec 15:48:56.552815 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:48:56.553065 [DEBUG] lw.py:115 _searchp_with_letters - 4
+['w']
+set([])
+{5: ['w']}
+03 Dec 15:48:56.553228 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:48:56.553396 [DEBUG] lw.py:115 _searchp_with_letters - 5
+[]
+set(['allow'])
+{}
+03 Dec 15:48:56.553540 [DEBUG] lw.py:119 _searchp_with_letters - Adding words if they match: set(['allow'])
+03 Dec 15:48:56.553707 [DEBUG] lw.py:115 _searchp_with_letters - 4
+['o']
+set([])
+{5: ['o']}
+03 Dec 15:48:56.553844 [DEBUG] lw.py:136 _searchp_with_letters - Adding all children.
+03 Dec 15:48:56.554057 [DEBUG] lw.py:115 _searchp_with_letters - 5
+[]
+set(['bollo', 'callo', 'hello'])
+{}
+03 Dec 15:48:56.554210 [DEBUG] lw.py:119 _searchp_with_letters - Adding words if they match: set(['bollo', 'callo', 'hello'])
+03 Dec 15:48:56.554405 [DEBUG] lw.py:192 check - testing word callo - reconstructed as: ['c', 'a', 'l', 'l', 'o'] testsolution {'3': 'o', '2': 'a', '4': 'c'}
+03 Dec 15:48:56.554562 [DEBUG] lw.py:192 check - testing word hello - reconstructed as: ['h', 'e', 'l', 'l', 'o'] testsolution {'3': 'o', '2': 'e', '4': 'h'}

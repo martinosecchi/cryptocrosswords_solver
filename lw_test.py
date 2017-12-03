@@ -6,6 +6,8 @@ def test_pattern():
 	assert p.check('collo') is False
 	assert p.check('a') is False
 	assert p.check('12ll3') is False
+	p = Pattern(['4','2','1','1','3'], {'1':'t'})
+	assert p.check('tetto') is False
 test_pattern()
 
 def test_trie():
@@ -18,4 +20,6 @@ def test_trie():
 	assert t.layer[4].children['o'].level == 5
 	assert t.search_pattern(Pattern(['1', '2', '4', '4', '3'], {'4':'l'})) == set(['hello', 'callo']) #no bollo
 	assert t.search_pattern(Pattern(['1', '2', '4', '4', '3'], {'2':'e', '3':'o'})) == set(['hello', 'messo']) #no tetto
+	assert t.search_pattern(Pattern(['1','2','1','1','3'], {})) == set(['tetto'])
+	assert t.search_pattern(Pattern(['4','2','1','1','3'], {})) == set(['callo', 'hello', 'messo'])
 test_trie()

@@ -74,6 +74,7 @@ class Trie(object):
             return self._searchp_with_letters(pattern, has_letters)
         else:
             # best avoid, this might as well be linear search.
+            # to make it a bit better:
             # look if there are repetitions of letters and their positions, then look in the different layers at the corresponding positions
             # test the pattern on those words that have the right length
             # (set operations)
@@ -83,7 +84,21 @@ class Trie(object):
             # Pattern([1,2,1,1,3], {1: letter}) and search for that
             # could do this for the most common letter, and then check the pattern
             # is there a more efficient way? probably
-            pass
+            counts = dict([(e, pattern.array_form.count(e)) for e in pattern.array_form])
+            most_occ = counts.keys()[counts.values().index(max(counts.values()))]
+            logapp('DEBUG', 'most frequent symbol: ' + most_occ)
+            positions = [ i for i in range(pattern.length) if pattern.array_form[i] == most_occ]
+            possible_letters = set([])
+            for pos in positions:
+                if possible_letters == set([]):
+                    possible_letters = set(self.layer[pos].lengths[pattern.length])
+                else:
+                    possible_letters = possible_letters & set(self.layer[pos].lengths[pattern.length]) # intersect
+            logapp('DEBUG', 'possible most frequent letter: ' + str(possible_letters))
+            possible_words = set([])
+            for l in possible_letters:
+                possible_words = possible_words | self._searchp_with_letters(Pattern(pattern.array_form, {most_occ:l}), 1) # union
+            return possible_words
 
     def _searchp_with_letters(self, p, has_letters):
         indexes, letters = p.get_letters_at_positions()
@@ -167,7 +182,7 @@ class Pattern(object):
                 if self._isnumber(x):
                     if testsolution.has_key(x):
                         testword[i] = testsolution[x]
-                    elif word[i] not in testsolution.values():
+                    elif word[i] not in testsolution.values() and word[i] not in self.solution.values():
                         testsolution[x] = word[i]
                         testword[i] = word[i]
                     else:
@@ -214,7 +229,7 @@ class Solver(object):
         self.patterns = []
         self.hints = {}
         self.solution = {}  #dict(zip(map(lambda x: str(x), range(1,len(alphabet)+1)),map(lambda x: str(x), range(1,len(alphabet)+1)) ))
-                            # {'1':'1', '2':'2', ...}
+                            # {'1':'1', '2':'2', ...} to become {'1': 'a', '2': 'b', ...}
         self._possible_vowels = []
         self._possible_letters = {}
 
