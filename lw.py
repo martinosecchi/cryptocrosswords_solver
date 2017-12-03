@@ -351,11 +351,9 @@ class Solver(object):
                 else:
                     pq.put(p)
             logapp('NOTICE', 'Solved!!!, solution is ' + str(self.solution))
+            print(self.solution)
         except KeyboardInterrupt:
             logapp('ERROR', 'Keyboard interrupted. still to solve:')
             while not pq.empty():
                 p = pq.get_nowait()
                 logapp('    ', str(p))
-
-s = Solver(testdict, 'test-input.txt')
-s.solve()
