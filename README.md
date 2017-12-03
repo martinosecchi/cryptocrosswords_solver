@@ -4,12 +4,12 @@ The program solves the cryptogram problem.
 The same letter corresponds to the same number (substitution cipher).
 
 Input is read as :
-n # number of columns
-m # number of rows
-# grid of sybols, _ if empty
+n //number of columns
+m // number of rows
+//grid of sybols, _ if empty
 1,2,3_
 _1,2,3
-# hints
+//hints
 1,a
 2,b
 3,c
