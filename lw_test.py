@@ -23,3 +23,13 @@ def test_trie():
 	assert t.search_pattern(Pattern(['1','2','1','1','3'], {})) == set(['tetto'])
 	assert t.search_pattern(Pattern(['4','2','1','1','3'], {})) == set(['callo', 'hello', 'messo'])
 test_trie()
+
+def test_solver():
+	s = Solver(testdict, 'test-input.txt')
+	assert s._intersection({1:1, 2:2, 3:3}, {3:3, 4:4}) == {3:3}
+	s.solve()
+	assert s.check_result('test-result.txt')
+	s = Solver(load_italian(), 'input.txt')
+	s.solve()
+	assert s.check_result('result.txt')
+test_solver()

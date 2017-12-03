@@ -5,10 +5,11 @@ import json
 import os, sys
 import re
 from logger import logapp
-from Queue import LifoQueue as Stack
+from Queue import LifoQueue as Stack, PriorityQueue, Queue
 
 alphabet = [l for l in 'abcdefghijklmnopqrstuvwxyz']
-testwords = list(set('hello callo bollo messo tetto wikipedia is a free online encyclopedia with the aim to allow anyone to edit articles wikipedia is the largest and most popular general reference work on the internet and is ranked the fifth most popular website'.split(' ')))
+testwords = 'hello callo bollo messo tetto'.split(' ')
+testdict = 'cassetta aria meg cain denso caro amori male sei ago crac nonnulla cameraman ares mago sig colon sa dare ceri teano erl tris real agnostica'.split(' ')
 
 class Node(object):
     def __init__(self):
@@ -147,6 +148,8 @@ class Pattern(object):
         self._number = re.compile(r'^[0-9]{1,2}$')
     def __str__(self):
         return ','.join([x if not self.solution.get(x) else self.solution[x] for x in self.array_form])
+    def __cmp__(self, other):
+        return cmp(other.has_letters(), self.has_letters()) # inverted, higher letter count figuers as smaller for pq
     def get_letters_at_positions(self):
         indexes = []
         letters = []
@@ -161,6 +164,8 @@ class Pattern(object):
             if self._isletter(self.solution.get(x) or '1'):
                 letters += 1
         return letters
+    def is_done(self):
+        return self.length == self.has_letters()
     def _isletter(self, x):
         return self._letter.match(x) is not None
     def _isnumber(self, x):
@@ -199,6 +204,7 @@ def load_english(filename="words_dictionary.json"):
         valid_words = json.load(english_dictionary)
         return valid_words.keys()
 def load_italian(filename="parole.txt"):
+    print('reading big file..')
     lines = []
     with open(filename, "r") as f:
         for line in f:
@@ -225,19 +231,16 @@ def load_italian(filename="parole.txt"):
 
 class Solver(object):
     def __init__(self, dictionary, inputfn):
-        self.t = Trie(load_italian(dictionary))
+        self.t = Trie(dictionary)
+        self.inputfn = inputfn
         self.patterns = []
         self.hints = {}
         self.solution = {}  #dict(zip(map(lambda x: str(x), range(1,len(alphabet)+1)),map(lambda x: str(x), range(1,len(alphabet)+1)) ))
                             # {'1':'1', '2':'2', ...} to become {'1': 'a', '2': 'b', ...}
-        self._possible_vowels = []
-        self._possible_letters = {}
-
     def _is_vowel(self, letter):
         return letter in 'aeiou'
 
-    def parse_input(self ):
-        filename = "input.txt"
+    def parse_input(self, filename="test-input.txt" ):
         lines = []
         hints = {}
         with open(filename, "r") as f:
@@ -269,19 +272,19 @@ class Solver(object):
     def _flatten(self, square, n, m):
         patterns = []
         # # horizontal
-        for i in range(n):
+        for i in range(m):
             word = []
-            for j in range(m):
+            for j in range(n):
                 word.append(square[i][j]) if square[i][j] != '_' else None
-                if square[i][j] == '_' or j == m-1:
+                if square[i][j] == '_' or j == n-1:
                     patterns.append(word) if len(word) > 1 else None
                     word = []
         # vertical
-        for j in range(m):
+        for j in range(n):
             word = []
-            for i in range(n):
+            for i in range(m):
                 word.append(square[i][j]) if square[i][j] != '_' else None
-                if square[i][j] == '_' or i == n-1:
+                if square[i][j] == '_' or i == m-1:
                     patterns.append(word) if len(word) > 1 else None
                     word = []
         return patterns
@@ -290,9 +293,69 @@ class Solver(object):
         for a in arrays:
             self.patterns.append(Pattern(a, self.solution))
 
+    def _intersection(self, dict1, dict2):
+        result = {}
+        for k,v in dict1.items():
+            if (k,v) in dict2.items():
+                result[k] = v
+        return result
+
+    def check_result(self, fn):
+        with open(fn, 'r') as f:
+            lines = f.readlines()
+            solution = dict([(l.split(',')[1].rstrip('\n'), l.split(',')[0]) for l in lines])
+            for k,v in self.solution.items():
+                if solution[k] != v:
+                    return False
+            return True
+
+    def update_solution(self, pattern, words):
+        # if there is only one word, easy
+        # otherwise check if I can get at least one letter out of this to add to the solution
+        if len(words) == 1:
+            word = words.pop()
+            for i in range(len(word)):
+                self.solution[pattern.array_form[i]] = word[i]
+        else:
+            common = {}
+            for w in words:
+                testsol = pattern.check(w)
+                if common == {}:
+                    common = testsol
+                else:
+                    common = self._intersection(common, testsol)
+                    if len(common) == 0:
+                        return
+            for k,v in common.items():
+                self.solution[k] = v
+
     def solve(self):
-        pattern_arays, self.hints = self.parse_input(inputfn)
+        pattern_arays, self.hints = self.parse_input(self.inputfn)
         for k,v in self.hints.items():
             self.solution[k] = v
         self._create_patterns(pattern_arays)
-        # ....
+        pq = Queue() # no priority queue, in case I get stuck with one I can't solve on top
+        self.patterns.sort()
+        for p in self.patterns:
+            pq.put(p)
+        try:
+            while not pq.empty():
+                p = pq.get_nowait()
+                if p.is_done():
+                    continue
+                # try to solve, and update solution with whatever I can find
+                # if it's not completely solved, put back
+                self.update_solution(p, self.t.search_pattern(p))
+                if p.is_done():
+                    continue
+                else:
+                    pq.put(p)
+            logapp('NOTICE', 'Solved!!!, solution is ' + str(self.solution))
+        except KeyboardInterrupt:
+            logapp('ERROR', 'Keyboard interrupted. still to solve:')
+            while not pq.empty():
+                p = pq.get_nowait()
+                logapp('    ', str(p))
+
+s = Solver(testdict, 'test-input.txt')
+s.solve()
